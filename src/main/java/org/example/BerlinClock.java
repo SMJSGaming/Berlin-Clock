@@ -3,7 +3,7 @@ package org.example;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.sql.Time;
 
 /**
  * @author Sjoerd Teijgeler
@@ -15,5 +15,5 @@ import java.util.Date;
 @AllArgsConstructor
 public class BerlinClock {
 
-    private Date date;
+    private Time time;
 }
