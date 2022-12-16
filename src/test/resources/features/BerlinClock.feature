@@ -62,7 +62,7 @@ Feature: Berlin clock
       | 23:59:59 |
     And several Berlin clocks are generated for the provided times
     When the single seconds converter is used
-    Then the single seconds indicator should match the provided strings:
+    Then the single second indicators should match the provided strings:
       | Y |
       | O |
 
@@ -75,7 +75,7 @@ Feature: Berlin clock
       | 12:35:00 |
     And several Berlin clocks are generated for the provided times
     When the single minutes converter is used
-    Then the single minutes indicator should match the provided strings:
+    Then the single minute indicators should match the provided strings:
       | OOOO |
       | YYYY |
       | YYOO |
@@ -91,7 +91,7 @@ Feature: Berlin clock
       | 12:35:00 |
     And several Berlin clocks are generated for the provided times
     When the 5 minutes converter is used
-    Then the 5 minutes indicator should match the provided strings:
+    Then the 5 minute indicators should match the provided strings:
       | OOOOOOOOOOO |
       | YYRYYRYYRYY |
       | OOOOOOOOOOO |
@@ -107,7 +107,7 @@ Feature: Berlin clock
       | 14:35:00 |
     And several Berlin clocks are generated for the provided times
     When the single hours converter is used
-    Then the single hours indicator should match the provided strings:
+    Then the single hour indicators should match the provided strings:
       | OOOO |
       | RRRO |
       | RROO |
@@ -123,9 +123,23 @@ Feature: Berlin clock
       | 16:35:00 |
     And several Berlin clocks are generated for the provided times
     When the 5 hours converter is used
-    Then the 5 hours indicator should match the provided strings:
+    Then the 5 hour indicators should match the provided strings:
       | OOOO |
       | RRRR |
       | OOOO |
       | ROOO |
       | RRRO |
+
+  Scenario: Generating several Berlin clocks and converting it to a full clock
+    Given the provided times:
+      | 00:00:00 |
+      | 23:59:59 |
+      | 16:50:06 |
+      | 11:37:01 |
+    And several Berlin clocks are generated for the provided times
+    When the toString is used
+    Then the indicators should match the provided strings:
+      | YOOOOOOOOOOOOOOOOOOOOOOO |
+      | ORRRRRRROYYRYYRYYRYYYYYY |
+      | YRRROROOOYYRYYRYYRYOOOOO |
+      | ORROOROOOYYRYYRYOOOOYYOO |

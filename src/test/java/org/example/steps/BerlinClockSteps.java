@@ -58,6 +58,11 @@ public class BerlinClockSteps {
         }
     }
 
+    @When("the toString is used")
+    public void theToStringIsUsed() {
+        this.lights = this.clocks.stream().map(BerlinClock::toString).toList();
+    }
+
     @Then("the time field should match:")
     public void theTimeFieldShouldMatch(final DataTable data) {
         // Converting the provided data table into local time entries
@@ -88,8 +93,8 @@ public class BerlinClockSteps {
         }
     }
 
-    @Then("^the (?:single|5) (?:seconds|minutes|hours) indicator should match the provided strings:$")
-    public void theIndicatorShouldMatchTheProvidedStrings(final List<String> lights) {
+    @Then("^the(?: (?:single|5) (?:second|minute|hour))? indicators should match the provided strings:$")
+    public void theIndicatorsShouldMatchTheProvidedStrings(final List<String> lights) {
         // Both lists have to match in order to succeed
         assertEquals(this.lights, lights);
     }
