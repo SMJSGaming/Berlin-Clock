@@ -88,4 +88,13 @@ public class BerlinClock {
         // Filling the string with red lights and appending the remaining lights as off
         return "R".repeat(lid) + "O".repeat(4 - lid);
     }
+
+    @Override
+    public String toString() {
+        return this.getSecondsLamp() +
+                this.getFiveHoursRow() +
+                this.getSingleHoursRow() +
+                this.getFiveMinutesRow() +
+                this.getSingleMinuteRow();
+    }
 }
