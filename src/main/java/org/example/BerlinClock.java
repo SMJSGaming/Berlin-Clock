@@ -48,4 +48,20 @@ public class BerlinClock {
 
         return "Y".repeat(lid) + "O".repeat(4 - lid);
     }
+
+    public String getFiveMinutesRow() {
+        // Technically the floor isn't needed. But to make sure this never goes wrong, I'll use it
+        final int lid = (int)Math.floor((float)this.time.getMinute() / 5);
+        final StringBuilder lights = new StringBuilder();
+
+        for (int i = 1; i <= lid; i++) {
+            if (i % 3 == 0) {
+                lights.append("R");
+            } else {
+                lights.append("Y");
+            }
+        }
+
+        return lights.append("O".repeat(11 - lid)).toString();
+    }
 }
