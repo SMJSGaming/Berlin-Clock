@@ -78,7 +78,7 @@ public class BerlinClock {
 
     public String getFiveHoursRow() {
         // Diving by 5 and flooring anything which remains from the single hours
-        final int lid = (int)Math.floor((float)this.time.getMinute() / 5);
+        final int lid = (int)Math.floor((float)this.time.getHour() / 5);
 
         // Filling the string with red lights and appending the remaining lights as off
         return "R".repeat(lid) + "O".repeat(4 - lid);
