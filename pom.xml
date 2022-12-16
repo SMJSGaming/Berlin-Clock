@@ -7,7 +7,7 @@
     <!-- Using the standard groupId since I currently don't own any Domain name which I could use -->
     <groupId>org.example</groupId>
     <artifactId>Berlin-Clock</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0-RELEASE</version>
     <description>A Berlin clock implementation for the Rabobank application</description>
 
     <properties>

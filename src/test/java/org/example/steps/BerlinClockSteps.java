@@ -13,6 +13,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * @author Sjoerd Teijgeler
+ * @version 1.0-RELEASE
+ */
 public class BerlinClockSteps {
 
     private List<BerlinClock> clocks;
