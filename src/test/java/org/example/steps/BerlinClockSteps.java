@@ -6,10 +6,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.BerlinClock;
 
+import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BerlinClockSteps {
 
@@ -17,10 +19,17 @@ public class BerlinClockSteps {
 
     private List<String> minutes;
 
-    @Given("several Berlin clock is generated for the following times:")
-    public void severalBerlinClockIsGeneratedForTheFollowingTimes(List<String> times) {
+    private List<String> times;
+
+    @Given("several Berlin clocks are generated for the following times:")
+    public void severalBerlinClocksAreGeneratedForTheFollowingTimes(List<String> times) {
         // Generate a list with clocks using the time string parser
         this.clocks = times.stream().map(BerlinClock::new).toList();
+    }
+
+    @Given("the following times:")
+    public void theFollowingTimes(List<String> times) {
+        this.times = times;
     }
 
     @When("I use the minute converter")
@@ -42,6 +51,21 @@ public class BerlinClockSteps {
 
         // Both lists have to match in order to succeed
         assertEquals(providedTimes, clockTimes);
+    }
+
+    @Then("^building several Berlin clocks should throw (.+)$")
+    public void buildingSeveralBerlinClocksShouldThrow(final String error) {
+        final Class<? extends Throwable> exception;
+
+        switch (error) {
+            case "NumberFormatException" -> exception = NumberFormatException.class;
+            case "DateTimeException" -> exception = DateTimeException.class;
+            default -> exception = IllegalArgumentException.class;
+        }
+
+        for (final String time : this.times) {
+            assertThrows(exception, () -> new BerlinClock(time));
+        }
     }
 
     @Then("it should be equal to the following Berlin clock minutes:")

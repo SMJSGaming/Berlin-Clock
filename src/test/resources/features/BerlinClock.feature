@@ -1,7 +1,7 @@
 Feature: Berlin clock
 
-  Scenario: Generating several berlin clocks with human-readable times
-    Given several Berlin clock is generated for the following times:
+  Scenario: Generating several Berlin clocks with human-readable times
+    Given several Berlin clocks are generated for the following times:
       | 00:00:00 |
       | 02:04:00 |
       | 08:23:00 |
@@ -31,8 +31,32 @@ Feature: Berlin clock
       | 16    | 50      | 6       |
       | 23    | 59      | 59      |
 
+    Scenario: Generating several Berlin clocks with nano second fields
+      Given the following times:
+        | 00:00:00:20 |
+        | 02:04:00:40 |
+        | 08:23:00:01 |
+        | 11:37:01:00 |
+      Then building several Berlin clocks should throw IllegalArgumentException
+
+  Scenario: Generating several Berlin clocks with text in the provided times
+    Given the following times:
+      | 00:00:error   |
+      | 02:error:00   |
+      | error:23:00   |
+      | 11:error37:01 |
+    Then building several Berlin clocks should throw NumberFormatException
+
+  Scenario: Generating several Berlin clocks with negative times
+    Given the following times:
+      | 02:04:200 |
+      | 08:88:88  |
+      | 36:37:01  |
+      | 61:61:61  |
+    Then building several Berlin clocks should throw DateTimeException
+
   Scenario: Generating several Berlin clocks
-    Given several Berlin clock is generated for the following times:
+    Given several Berlin clocks are generated for the following times:
       | 00:00:00 |
       | 23:59:59 |
       | 12:32:00 |
