@@ -42,6 +42,11 @@ public class BerlinClock {
         }
     }
 
+    public String getSecondsLamp() {
+        // Using a modulo of 2 to turn on when the seconds are even
+        return this.time.getSecond() % 2 == 0 ? "Y" : "O";
+    }
+
     public String getSingleMinuteRow() {
         // Using a modulo of 5 to test how many minutes remain
         final int lid = this.time.getMinute() % 5;
