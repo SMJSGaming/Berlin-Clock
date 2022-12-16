@@ -17,25 +17,41 @@ public class BerlinClockSteps {
 
     private List<BerlinClock> clocks;
 
-    private List<String> minutes;
+    private List<String> lights;
 
     private List<String> times;
 
-    @Given("several Berlin clocks are generated for the following times:")
-    public void severalBerlinClocksAreGeneratedForTheFollowingTimes(List<String> times) {
-        // Generate a list with clocks using the time string parser
-        this.clocks = times.stream().map(BerlinClock::new).toList();
-    }
-
-    @Given("the following times:")
-    public void theFollowingTimes(List<String> times) {
+    @Given("the provided times:")
+    public void theProvidedTimes(List<String> times) {
         this.times = times;
     }
 
-    @When("I use the minute converter")
-    public void iUseTheMinuteConverter() {
-        // Gathering the berlin clock lights and storing them
-        this.minutes = this.clocks.stream().map(BerlinClock::getSingleMinuteRow).toList();
+    @Given("several Berlin clocks are generated for the provided times")
+    public void severalBerlinClocksAreGeneratedForTheProvidedTimes() {
+        // Generate a list with clocks using the time string parser
+        this.clocks = this.times.stream().map(BerlinClock::new).toList();
+    }
+
+    @When("^the (single|5) (seconds|minutes|hours) converter is used$")
+    public void theConverterIsUsed(final String amount, final String scale) {
+        // Gathering the berlin clock lights and storing them based on the provided amount and scale
+        switch (scale) {
+            case "seconds" -> {
+                assertEquals(amount, "single");
+
+                // Not yet implemented
+            }
+            case "minutes" -> {
+                if (amount.equals("single")) {
+                    this.lights = this.clocks.stream().map(BerlinClock::getSingleMinuteRow).toList();
+                } else {
+                    this.lights = this.clocks.stream().map(BerlinClock::getFiveMinutesRow).toList();
+                }
+            }
+            case "hours" -> {
+                // Not yet implemented
+            }
+        }
     }
 
     @Then("the time field should match:")
@@ -68,9 +84,9 @@ public class BerlinClockSteps {
         }
     }
 
-    @Then("it should be equal to the following Berlin clock minutes:")
-    public void itShouldBeEqualToTheFollowingBerlinClockMinutes(List<String> berlinMinutes) {
+    @Then("^the (?:single|5) (?:seconds|minutes|hours) indicator should match the provided strings:$")
+    public void theIndicatorShouldMatchTheProvidedStrings(final List<String> lights) {
         // Both lists have to match in order to succeed
-        assertEquals(this.minutes, berlinMinutes);
+        assertEquals(this.lights, lights);
     }
 }
