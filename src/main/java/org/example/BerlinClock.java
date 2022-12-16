@@ -46,6 +46,7 @@ public class BerlinClock {
         // Using a modulo of 5 to test how many minutes remain
         final int lid = this.time.getMinute() % 5;
 
+        // Filling the string with yellow lights and appending the remaining lights as off
         return "Y".repeat(lid) + "O".repeat(4 - lid);
     }
 
@@ -54,6 +55,7 @@ public class BerlinClock {
         final int lid = (int)Math.floor((float)this.time.getMinute() / 5);
         final StringBuilder lights = new StringBuilder();
 
+        // Looping over the lid lights to switch from yellow to red on every third light
         for (int i = 1; i <= lid; i++) {
             if (i % 3 == 0) {
                 lights.append("R");
@@ -62,6 +64,23 @@ public class BerlinClock {
             }
         }
 
+        // Appending the remaining lights as off
         return lights.append("O".repeat(11 - lid)).toString();
+    }
+
+    public String getSingleHoursRow() {
+        // Using a modulo of 5 to test how many hours remain
+        final int lid = this.time.getHour() % 5;
+
+        // Filling the string with red lights and appending the remaining lights as off
+        return "R".repeat(lid) + "O".repeat(4 - lid);
+    }
+
+    public String getFiveHoursRow() {
+        // Diving by 5 and flooring anything which remains from the single hours
+        final int lid = (int)Math.floor((float)this.time.getMinute() / 5);
+
+        // Filling the string with red lights and appending the remaining lights as off
+        return "R".repeat(lid) + "O".repeat(4 - lid);
     }
 }
