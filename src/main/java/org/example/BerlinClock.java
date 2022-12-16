@@ -10,7 +10,6 @@ import java.time.LocalTime;
  * @author Sjoerd Teijgeler
  * @version 0.1.0-SNAPSHOT
  * A class which converts a provided time into the berlin clock.
- * The result will be printed to the terminal
  */
 @Setter
 @AllArgsConstructor
@@ -39,5 +38,12 @@ public class BerlinClock {
         } else {
             throw new IllegalArgumentException();
         }
+    }
+
+    public String getSingleMinuteRow() {
+        // Using a modulo of 5 to test how many minutes remain
+        final int lid = this.time.getMinute() % 5;
+
+        return "Y".repeat(lid) + "O".repeat(4 - lid);
     }
 }
