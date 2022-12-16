@@ -1,6 +1,7 @@
 package org.example;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.time.DateTimeException;
@@ -12,6 +13,7 @@ import java.time.LocalTime;
  * A class which converts a provided time into the berlin clock.
  */
 @Setter
+@Getter
 @AllArgsConstructor
 public class BerlinClock {
 
