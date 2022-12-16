@@ -49,7 +49,11 @@ public class BerlinClockSteps {
                 }
             }
             case "hours" -> {
-                // Not yet implemented
+                if (amount.equals("single")) {
+                    this.lights = this.clocks.stream().map(BerlinClock::getSingleHoursRow).toList();
+                } else {
+                    this.lights = this.clocks.stream().map(BerlinClock::getFiveHoursRow).toList();
+                }
             }
         }
     }

@@ -87,3 +87,35 @@ Feature: Berlin clock
       | OOOOOOOOOOO |
       | YYRYOOOOOOO |
       | YYRYYRYOOOO |
+
+  Scenario: Generating several Berlin clocks and converting the single hours
+    Given the provided times:
+      | 00:00:00 |
+      | 23:59:59 |
+      | 02:04:00 |
+      | 08:23:00 |
+      | 14:35:00 |
+    And several Berlin clocks are generated for the provided times
+    When the single hours converter is used
+    Then the single hours indicator should match the provided strings:
+      | OOOO |
+      | RRRO |
+      | RROO |
+      | RRRO |
+      | RRRR |
+
+  Scenario: Generating several Berlin clocks and converting the 5 hours
+    Given the provided times:
+      | 00:00:00 |
+      | 23:59:59 |
+      | 02:04:00 |
+      | 08:23:00 |
+      | 16:35:00 |
+    And several Berlin clocks are generated for the provided times
+    When the 5 hours converter is used
+    Then the 5 hours indicator should match the provided strings:
+      | OOOO |
+      | RRRR |
+      | OOOO |
+      | ROOO |
+      | RRRO |
