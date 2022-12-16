@@ -56,6 +56,16 @@ Feature: Berlin clock
       | 61:61:61  |
     Then building several Berlin clocks should throw DateTimeException
 
+  Scenario: Generating several Berlin clocks and converting the seconds
+    Given the provided times:
+      | 00:00:00 |
+      | 23:59:59 |
+    And several Berlin clocks are generated for the provided times
+    When the single seconds converter is used
+    Then the single seconds indicator should match the provided strings:
+      | Y |
+      | O |
+
   Scenario: Generating several Berlin clocks and converting the single minutes
     Given the provided times:
       | 00:00:00 |

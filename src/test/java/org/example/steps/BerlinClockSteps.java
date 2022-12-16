@@ -39,7 +39,7 @@ public class BerlinClockSteps {
             case "seconds" -> {
                 assertEquals(amount, "single");
 
-                // Not yet implemented
+                this.lights = this.clocks.stream().map(BerlinClock::getSecondsLamp).toList();
             }
             case "minutes" -> {
                 if (amount.equals("single")) {
